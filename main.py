@@ -41,34 +41,34 @@ def add():
     person_data = {"nombre": nombre, "edad": edad, "ciudad": ciudad, "identificacion": identificacion}
 
     headers = {'apikey': API_KEY}
-    responseHabitacionesS = requests.post('https://utplwso2.tk/apipersona/3.0/personas', json=person_data, headers=headers)
+    responseProductosS = requests.post('https://utplwso2.tk/apipersona/3.0/personas', json=person_data, headers=headers)
 
     return redirect(url_for('personas'))
 
-@app.route('/huespedes')
-def huespedes():
-    responseHabitaciones = requests.get('https://utpl-interoperabilidad-ejercicio1.onrender.com/v1_0/huesped')
-    return render_template('huespedes.html', huespedesl=responseHabitaciones.json())
+@app.route('/productos')
+def productos():
+    responseProductos = requests.get('https://utplapijimmy1.onrender.com/v1_0/producto')
+    return render_template('productos.html', productosl=responseProductos.json())
 
-@app.route('/huespedes', methods=['POST'])
-def addHuesped():
-    print("llego por aqui a guardar huespedes")
+@app.route('/productos', methods=['POST'])
+def addProductos():
+    print("llego por aqui a guardar productos")
 
     nombreValue = request.form.get('nombre')
-    ciudad = request.form.get('ciudad')
-    edad = int(request.form.get('edad'))
-    hab = int(request.form.get('hab'))
+    categoria = request.form.get('categoria')
+    tipo = int(request.form.get('tipo'))
+    cod = int(request.form.get('cod'))
 
     room_data = {
         "nombre": nombreValue,
-        "ciudad": ciudad,
-        "edad": edad,
-        "hab": hab
+        "categoria": categoria,
+        "tipo": tipo,
+        "cod": cod
     }
 
-    responseHabitacionesS = requests.post('https://utpl-interoperabilidad-ejercicio1.onrender.com/v1_0/huesped', json=room_data)
+    responseProductosS = requests.post('https://utplapijimmy1.onrender.com/v1_0/producto', json=room_data)
 
-    return redirect(url_for('huespedes'))
+    return redirect(url_for('productos'))
 
 if __name__ == '__main__':
     app.run(debug=True)
